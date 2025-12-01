@@ -1,0 +1,47 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      // Configure CMake with the "Debug" preset
+      "type": "cmake",
+      "label": "STM32: Configure (Debug)",
+      "command": "configure",
+      "preset": "Debug",
+      "group": "build",
+      "problemMatcher": [],
+      "detail": "Configure CMake project with Debug preset"
+    },
+    {
+      // Build the project using CMake preset "Debug"
+      "type": "cmake",
+      "label": "STM32: Build (Debug)",
+      "command": "build",
+      "targets": [
+        "all"
+      ],
+      "preset": "Debug",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "detail": "Build STM32 project (Debug preset)"
+    },
+    {
+      // Flash + run the firmware WITHOUT debugging
+      "label": "STM32: Flash (Run without debug)",
+      "type": "shell",
+      "command": "STM32_Programmer_CLI",
+      "args": [
+        "-c",
+        "port=SWD",
+        "-d",
+        "${command:st-stm32-ide-debug-launch.get-projects-binary-from-context1}",
+        "-rst"
+      ],
+      "problemMatcher": [],
+      "group": "test",
+      "detail": "Flash ELF to target and reset using STM32CubeProgrammer"
+    }
+  ]
+}
